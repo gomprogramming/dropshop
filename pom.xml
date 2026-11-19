@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  pom.xml = "Project Object Model". Es el archivo que lee Maven para saber:
-   - cómo se llama el proyecto,
-   - qué versión de Java usar,
-   - qué librerías descargar (dependencias),
-   - y qué plugins usar para compilar y ejecutar.
--->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- Identidad del proyecto -->
     <groupId>dropshop</groupId>
     <artifactId>dropshop</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -19,32 +11,26 @@
     <name>DropShop</name>
 
     <properties>
-        <!-- Compilar para Java 21 -->
         <maven.compiler.release>21</maven.compiler.release>
-        <!-- Codificación de los archivos fuente (para tildes y ñ) -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
-        <!-- Lanterna: librería para interfaces en modo texto (ventanas, menús, botones en la terminal) -->
         <dependency>
             <groupId>com.googlecode.lanterna</groupId>
             <artifactId>lanterna</artifactId>
             <version>3.1.2</version>
         </dependency>
-        <!-- Driver JDBC de SQLite: permite a Java leer/escribir el archivo dropshop.db -->
         <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.49.1.0</version>
         </dependency>
-        <!-- sqlite-jdbc usa SLF4J para logs; "nop" = no imprimir nada (si no, ensucia la pantalla de Lanterna) -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
             <version>1.7.36</version>
         </dependency>
-        <!-- Gson: convierte el JSON que devuelve la API de DummyJSON en objetos Java -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
@@ -54,14 +40,12 @@
 
     <build>
         <plugins>
-            <!-- Compilador de Java (fijamos versión para que el build sea siempre igual) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
             </plugin>
 
-            <!-- Permite ejecutar la app con: mvn compile exec:java -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>

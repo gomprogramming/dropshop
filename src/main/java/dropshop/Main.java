@@ -1,8 +1,11 @@
 package dropshop;
 
-import com.googlecode.lanterna.gui2.*;
+import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
+import dropshop.controller.LoginController;
+import dropshop.model.ShopModel;
+import dropshop.view.LoginWindow;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -10,13 +13,16 @@ public class Main {
         screen.startScreen();
         MultiWindowTextGUI gui = new MultiWindowTextGUI(screen);
 
-        BasicWindow ventana = new BasicWindow("DropShop");
-        Panel panel = new Panel();
-        panel.addComponent(new Label("¡Bienvenido a DropShop!"));
-        panel.addComponent(new Button("Salir", ventana::close));
-        ventana.setComponent(panel);
+        try {
+            ShopModel model = new ShopModel();
 
-        gui.addWindowAndWait(ventana);
-        screen.stopScreen();
+            LoginController loginController = new LoginController(model);
+            LoginWindow loginWindow = new LoginWindow(loginController, gui);
+            loginController.setView(loginWindow);
+
+            gui.addWindowAndWait(loginWindow);
+        } finally {
+            screen.stopScreen();
+        }
     }
 }
