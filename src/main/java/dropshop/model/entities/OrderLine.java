@@ -36,7 +36,7 @@ public class OrderLine {
     public double billingAmount() {
         return productPrice * quantity;
     }
-    public double benefitAmount() {
+    public double profitAmount() {
         return (productPrice - productCost) * quantity;
     }
 

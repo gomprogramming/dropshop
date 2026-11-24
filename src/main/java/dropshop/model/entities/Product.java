@@ -7,24 +7,24 @@ public class Product{
     private String category;
     private double costproduction;
     private double costsale;
-    private double valoration;
-    private double totalbenefit;
-    private int numvaloration;
+    private double rating;
+    private double totalProfit;
+    private int ratingCount;
     private int numsales;
     private int stock;
 
-    public Product(int id, String name, String description, String category, double costproduction, double costsale, double valoration,double totalbenefit, int numvaloration, int numsales, int stock) {
+    public Product(int id, String name, String description, String category, double costproduction, double costsale, double rating,double totalProfit, int ratingCount, int numsales, int stock) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.category = category;
         this.costproduction = costproduction;
         this.costsale = costsale;
-        this.valoration = valoration;
-        this.numvaloration = numvaloration;
+        this.rating = rating;
+        this.ratingCount = ratingCount;
         this.numsales = numsales;
         this.stock = stock;
-        this.totalbenefit = totalbenefit;
+        this.totalProfit = totalProfit;
     }
     public int getId(){
         return id;
@@ -45,17 +45,17 @@ public class Product{
     public double getCostsale(){
         return costsale;
     }
-    public double getValoration(){
-        return valoration;
+    public double getRating(){
+        return rating;
     }
-    public double getBenefit(){
+    public double getProfit(){
         return costsale - costproduction;
     }
-    public double getTotalbenefit(){
-        return totalbenefit;
+    public double getTotalProfit(){
+        return totalProfit;
     }
-    public int getNumvaloration(){
-        return numvaloration;
+    public int getRatingCount(){
+        return ratingCount;
     }
     public int getNumsales(){
         return numsales;
@@ -76,7 +76,7 @@ public class Product{
         }
         stock -= quantity;
         numsales += quantity;
-        totalbenefit += getBenefit() * quantity;
+        totalProfit += getProfit() * quantity;
     }
     public void setprice(double price){
         if (price < 0 || price < costproduction) {
@@ -90,11 +90,11 @@ public class Product{
         }
         this.stock = stock;
     }
-    public void addRating(double nueva) {
-        if (nueva < 1 || nueva > 5) {
+    public void addRating(double newRating) {
+        if (newRating < 1 || newRating > 5) {
             throw new IllegalArgumentException("Rating must be between 1 and 5");
         }
-        valoration = (valoration * numvaloration + nueva) / (numvaloration + 1);
-        numvaloration++;
+        rating = (rating * ratingCount + newRating) / (ratingCount + 1);
+        ratingCount++;
     }
 }

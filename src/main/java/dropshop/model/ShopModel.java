@@ -312,11 +312,11 @@ public class ShopModel {
         return total;
     }
 
-    public double getTotalBenefit() {
+    public double getTotalProfit() {
         requireAdmin();
         double total = 0;
         for (Order o : orders) {
-            if (o.getStatus() != OrderStatus.CANCELLED) total += o.getTotalBenefitAmount();
+            if (o.getStatus() != OrderStatus.CANCELLED) total += o.getTotalProfitAmount();
         }
         return total;
     }

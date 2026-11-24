@@ -5,6 +5,7 @@ import com.googlecode.lanterna.gui2.WindowBasedTextGUI;
 import dropshop.controller.CartController;
 import dropshop.controller.CatalogController;
 import dropshop.controller.LoginController;
+import dropshop.controller.OrdersController;
 import dropshop.model.ShopModel;
 
 public class TextApp {
@@ -41,4 +42,13 @@ public class TextApp {
         gui.addWindowAndWait(window);
         model.removeListener(window);
     }
+    public void showMyOrders() {
+        OrdersController controller = new OrdersController(model);
+        OrdersWindow window = new OrdersWindow(controller, gui);
+        controller.setView(window);
+        model.addListener(window);
+        controller.loadOrders();
+        gui.addWindowAndWait(window);
+        model.removeListener(window);
+}
 }

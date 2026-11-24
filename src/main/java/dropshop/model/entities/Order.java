@@ -39,10 +39,10 @@ public class Order {
         return total;
     }
 
-    public double getTotalBenefitAmount() {
+    public double getTotalProfitAmount() {
         double total = 0;
         for (OrderLine line : orderLines) {
-            total += line.benefitAmount();
+            total += line.profitAmount();
         }
         return total;
     }

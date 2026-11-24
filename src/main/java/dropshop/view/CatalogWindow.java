@@ -48,7 +48,7 @@ public class CatalogWindow extends BasicWindow implements CatalogView, ModelList
 
         Panel bottom = new Panel(new LinearLayout(Direction.VERTICAL));
         bottom.addComponent(lblCart);
-        bottom.addComponent(new Label("Arrows: move · Enter: add to cart · C: view cart · Tab: switch area · Esc: log out"));
+        bottom.addComponent(new Label("Arrows: move · Enter: add to cart · C: view cart · O: view orders · Tab: switch area · Esc: log out"));
         root.addComponent(bottom, BorderLayout.Location.BOTTOM);
 
         setComponent(root);
@@ -66,7 +66,10 @@ public class CatalogWindow extends BasicWindow implements CatalogView, ModelList
                     controller.logout();
                     handled.set(true);
                 } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'c') {
-                    app.showCart();
+                app.showCart();
+                    handled.set(true);
+                } else if (key.getKeyType() == KeyType.Character && key.getCharacter() == 'o') {
+                    app.showMyOrders();
                     handled.set(true);
                 }
             }
@@ -90,7 +93,7 @@ public class CatalogWindow extends BasicWindow implements CatalogView, ModelList
     }
 
     private String[] toRow(Product p) {
-        String rating = p.getNumvaloration() == 0 ? "-" : String.format("%.1f/5", p.getValoration());
+        String rating = p.getRatingCount() == 0 ? "-" : String.format("%.1f/5", p.getRating());
         return new String[] {
                 p.getName(),
                 p.getCategory(),
