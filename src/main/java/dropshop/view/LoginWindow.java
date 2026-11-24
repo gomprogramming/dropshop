@@ -22,10 +22,12 @@ public class LoginWindow extends BasicWindow implements LoginView {
     private final WindowBasedTextGUI gui;
     private final TextBox txtUser = new TextBox(new TerminalSize(22, 1));
     private final TextBox txtPass = new TextBox(new TerminalSize(22, 1)).setMask('*');
+    private final TextApp app;
 
-    public LoginWindow(LoginController controller, WindowBasedTextGUI gui) {
+    public LoginWindow(LoginController controller, WindowBasedTextGUI gui,TextApp app) {
         super("Log in");
         this.gui = gui;
+        this.app = app;
         setHints(List.of(Hint.CENTERED));
 
         Panel root = new Panel(new LinearLayout(Direction.VERTICAL));
@@ -70,6 +72,9 @@ public class LoginWindow extends BasicWindow implements LoginView {
 
     @Override
     public void openCustomerArea(String username) {
+        app.showCatalog();
+        txtPass.setText("");
+        setFocusedInteractable(txtUser);
         MessageDialog.showMessageDialog(gui, "Welcome",
                 "Hello, " + username + ".\n(The catalog will be the next screen)");
     }

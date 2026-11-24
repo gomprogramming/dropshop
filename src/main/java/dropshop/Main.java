@@ -3,9 +3,8 @@ package dropshop;
 import com.googlecode.lanterna.gui2.MultiWindowTextGUI;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import dropshop.controller.LoginController;
 import dropshop.model.ShopModel;
-import dropshop.view.LoginWindow;
+import dropshop.view.TextApp;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -15,12 +14,7 @@ public class Main {
 
         try {
             ShopModel model = new ShopModel();
-
-            LoginController loginController = new LoginController(model);
-            LoginWindow loginWindow = new LoginWindow(loginController, gui);
-            loginController.setView(loginWindow);
-
-            gui.addWindowAndWait(loginWindow);
+            new TextApp(model, gui).start();
         } finally {
             screen.stopScreen();
         }

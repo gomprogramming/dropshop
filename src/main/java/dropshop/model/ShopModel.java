@@ -94,10 +94,10 @@ public class ShopModel {
             if (u.getUsername().equalsIgnoreCase(username))
                 throw new IllegalArgumentException("That username already exists");
         }
-        User nuevo = new User(nextUserId++, username, PasswordHasher.hash(password),
+        User newUser = new User(nextUserId++, username, PasswordHasher.hash(password),
                 email, address, User.Role.CUSTOMER);
-        users.add(nuevo);
-        return nuevo;
+        users.add(newUser);
+        return newUser;
     }
 
     public User getCurrentUser() { return currentUser; }
@@ -125,13 +125,13 @@ public class ShopModel {
     }
 
     public List<Product> searchProducts(String text, String category) {
-        String buscado = (text == null) ? "" : text.toLowerCase();
+        String query = (text == null) ? "" : text.toLowerCase();
         List<Product> result = new ArrayList<>();
         for (Product p : products) {
-            boolean nombreOk = p.getName().toLowerCase().contains(buscado);
-            boolean categoriaOk = category == null || category.equals("All")
+            boolean nameMatches = p.getName().toLowerCase().contains(query);
+            boolean categoryMatches = category == null || category.equals("All")
                     || p.getCategory().equals(category);
-            if (nombreOk && categoriaOk) result.add(p);
+            if (nameMatches && categoryMatches) result.add(p);
         }
         return result;
     }
@@ -148,8 +148,8 @@ public class ShopModel {
         requireLogin();
         if (quantity <= 0) throw new IllegalArgumentException("Quantity must be positive");
         Product p = findProductById(productId);
-        int yaEnCarrito = cart.getItems().getOrDefault(productId, 0);
-        if (yaEnCarrito + quantity > p.getStock()) {
+        int alreadyInCart = cart.getItems().getOrDefault(productId, 0);
+        if (alreadyInCart + quantity > p.getStock()) {
             throw new IllegalStateException("Only " + p.getStock() + " units left of " + p.getName());
         }
         cart.addItem(productId, quantity);

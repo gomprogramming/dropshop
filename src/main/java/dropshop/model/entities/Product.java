@@ -67,16 +67,16 @@ public class Product{
         return stock > 0;
     }
 
-    public void sell(int cantidad) {
-        if (cantidad <= 0) {
+    public void sell(int quantity) {
+        if (quantity <= 0) {
             throw new IllegalArgumentException("Quantity must be positive");
         }
-        if (cantidad > stock) {
+        if (quantity > stock) {
             throw new IllegalStateException("Not enough stock of " + name);
         }
-        stock -= cantidad;
-        numsales += cantidad;
-        totalbenefit += getBenefit() * cantidad;
+        stock -= quantity;
+        numsales += quantity;
+        totalbenefit += getBenefit() * quantity;
     }
     public void setprice(double price){
         if (price < 0 || price < costproduction) {
