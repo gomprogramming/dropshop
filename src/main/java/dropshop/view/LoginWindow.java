@@ -75,13 +75,12 @@ public class LoginWindow extends BasicWindow implements LoginView {
         app.showCatalog();
         txtPass.setText("");
         setFocusedInteractable(txtUser);
-        MessageDialog.showMessageDialog(gui, "Welcome",
-                "Hello, " + username + ".\n(The catalog will be the next screen)");
     }
 
     @Override
     public void openAdminArea(String username) {
-        MessageDialog.showMessageDialog(gui, "Welcome",
-                "Hello, " + username + " (admin).\n(The admin panel will come later)");
+        app.showAdminMenu();
+        txtPass.setText("");
+        setFocusedInteractable(txtUser);
     }
 }

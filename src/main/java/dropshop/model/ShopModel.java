@@ -1,8 +1,20 @@
 package dropshop.model;
 
-import dropshop.model.entities.*;
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import dropshop.model.entities.Cart;
+import dropshop.model.entities.Order;
+import dropshop.model.entities.OrderLine;
+import dropshop.model.entities.OrderStatus;
+import dropshop.model.entities.Product;
+import dropshop.model.entities.Supplier;
+import dropshop.model.entities.User;
 
 public class ShopModel {
 
@@ -228,6 +240,7 @@ public class ShopModel {
         return mine;
     }
 
+
     public void cancelMyOrder(int orderId) {
         requireLogin();
         Order o = findOrderById(orderId);
@@ -344,5 +357,12 @@ public class ShopModel {
         Map<String, Integer> sorted = new LinkedHashMap<>();
         for (Map.Entry<String, Integer> e : entries) sorted.put(e.getKey(), e.getValue());
         return sorted;
+    }
+    public String getUsernameOf(int userId) {
+        requireAdmin();
+        for (User u : users) {
+            if (u.getId() == userId) return u.getUsername();
+        }
+        return "unknown";
     }
 }

@@ -2,6 +2,8 @@ package dropshop.view;
 
 import com.googlecode.lanterna.gui2.WindowBasedTextGUI;
 
+import dropshop.controller.AdminMenuController;
+import dropshop.controller.AdminOrdersController;
 import dropshop.controller.CartController;
 import dropshop.controller.CatalogController;
 import dropshop.controller.LoginController;
@@ -46,9 +48,24 @@ public class TextApp {
         OrdersController controller = new OrdersController(model);
         OrdersWindow window = new OrdersWindow(controller, gui);
         controller.setView(window);
+        model.addListener(window);       controller.loadOrders();
+        gui.addWindowAndWait(window);
+        model.removeListener(window);
+    }
+    public void showAdminMenu() {
+        AdminMenuController controller = new AdminMenuController(model);
+        AdminMenuWindow window = new AdminMenuWindow(controller, gui, this);
+        controller.setView(window);
+        gui.addWindowAndWait(window);
+    }
+
+    public void showAdminOrders() {
+        AdminOrdersController controller = new AdminOrdersController(model);
+        AdminOrdersWindow window = new AdminOrdersWindow(controller, gui);
+        controller.setView(window);
         model.addListener(window);
         controller.loadOrders();
         gui.addWindowAndWait(window);
         model.removeListener(window);
-}
+    }
 }
