@@ -156,4 +156,6 @@ public class CatalogWindow extends BasicWindow implements CatalogView, ModelList
 
     @Override
     public void ordersChanged() { }
+
+    @Override public void suppliersChanged() { }
 }

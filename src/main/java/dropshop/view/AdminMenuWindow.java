@@ -2,7 +2,6 @@ package dropshop.view;
 
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.gui2.*;
-import com.googlecode.lanterna.gui2.dialogs.MessageDialog;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import dropshop.controller.AdminMenuController;
@@ -23,9 +22,9 @@ public class AdminMenuWindow extends BasicWindow implements AdminMenuView {
 
         ActionListBox menu = new ActionListBox(new TerminalSize(32, 5));
         menu.addItem("Manage orders", app::showAdminOrders);
-        menu.addItem("Products & stock", () -> comingSoon(gui));
-        menu.addItem("Suppliers", () -> comingSoon(gui));
-        menu.addItem("Statistics", () -> comingSoon(gui));
+        menu.addItem("Products & stock", app::showProducts);
+        menu.addItem("Suppliers", app::showSuppliers);
+        menu.addItem("Statistics", app::showStatistics);
         menu.addItem("Log out", controller::logout);
         root.addComponent(menu);
 
@@ -42,10 +41,6 @@ public class AdminMenuWindow extends BasicWindow implements AdminMenuView {
                 }
             }
         });
-    }
-
-    private void comingSoon(WindowBasedTextGUI gui) {
-        MessageDialog.showMessageDialog(gui, "Coming soon", "This section is not ready yet.");
     }
 
     @Override

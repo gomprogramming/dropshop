@@ -161,4 +161,5 @@ public class AdminOrdersWindow extends BasicWindow implements AdminOrdersView, M
 
     @Override public void cartChanged(int itemCount, double total) { }
     @Override public void productsChanged() { }
+    @Override public void suppliersChanged() { }
 }

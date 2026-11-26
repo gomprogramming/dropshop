@@ -288,6 +288,7 @@ public class ShopModel {
         if (daysToDeliver <= 0) throw new IllegalArgumentException("Delivery days must be greater than 0");
         Supplier s = new Supplier(nextSupplierId++, name, email, address, daysToDeliver);
         suppliers.add(s);
+        notifySuppliersChanged();
         return s;
     }
 
@@ -364,5 +365,8 @@ public class ShopModel {
             if (u.getId() == userId) return u.getUsername();
         }
         return "unknown";
+    }
+    private void notifySuppliersChanged() {
+        for (ModelListener l : List.copyOf(listeners)) l.suppliersChanged();
     }
 }

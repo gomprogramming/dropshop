@@ -8,6 +8,9 @@ import dropshop.controller.CartController;
 import dropshop.controller.CatalogController;
 import dropshop.controller.LoginController;
 import dropshop.controller.OrdersController;
+import dropshop.controller.ProductsController;
+import dropshop.controller.StatisticsController;
+import dropshop.controller.SuppliersController;
 import dropshop.model.ShopModel;
 
 public class TextApp {
@@ -65,6 +68,33 @@ public class TextApp {
         controller.setView(window);
         model.addListener(window);
         controller.loadOrders();
+        gui.addWindowAndWait(window);
+        model.removeListener(window);
+    }
+    public void showStatistics() {
+        StatisticsController controller = new StatisticsController(model);
+        StatisticsWindow window = new StatisticsWindow(controller);
+        controller.setView(window);
+        model.addListener(window);
+        controller.load();
+        gui.addWindowAndWait(window);
+        model.removeListener(window);
+    }
+    public void showProducts() {
+        ProductsController controller = new ProductsController(model);
+        ProductsWindow window = new ProductsWindow(controller, gui);
+        controller.setView(window);
+        model.addListener(window);
+        controller.loadProducts();
+        gui.addWindowAndWait(window);
+        model.removeListener(window);
+    }
+    public void showSuppliers() {
+        SuppliersController controller = new SuppliersController(model);
+        SuppliersWindow window = new SuppliersWindow(controller, gui);
+        controller.setView(window);
+        model.addListener(window);
+        controller.loadSuppliers();
         gui.addWindowAndWait(window);
         model.removeListener(window);
     }

@@ -169,4 +169,5 @@ public class OrdersWindow extends BasicWindow implements OrdersView, ModelListen
 
     @Override public void cartChanged(int itemCount, double total) { }
     @Override public void productsChanged() { }
+    @Override public void suppliersChanged() { }
 }

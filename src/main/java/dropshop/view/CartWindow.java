@@ -149,5 +149,6 @@ public class CartWindow extends BasicWindow implements CartView, ModelListener {
     }
 
     @Override public void productsChanged() { }
-    @Override public void ordersChanged()   { }
+    @Override public void ordersChanged()  { }
+    @Override public void suppliersChanged() { }
 }
